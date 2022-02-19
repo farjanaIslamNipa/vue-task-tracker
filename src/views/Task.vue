@@ -1,11 +1,11 @@
 <template>
-  <div :class="[task.reminder ? 'reminder' : 'reminder-false', 'task d-flex justify-content-between align-items-center py-2 px-3']">
+  <div @dblclick="$emit('toggle-reminder', task.id)" :class="[task.reminder ? 'reminder' : 'reminder-false', 'task d-flex justify-content-between align-items-center py-2 px-3']">
     <div>
       <h5>{{ task.text }}</h5>
       <p class="mb-0">{{ task.day }}</p>
     </div>
     <div class="">
-      <button @click="onDelete(task.id)" class="btn text-danger delete-icon"><i class="far fa-trash-alt"></i></button>
+      <button @click="$emit('delete-task', task.id)" class="btn text-danger delete-icon"><i class="far fa-trash-alt"></i></button>
     </div>
   </div>
 </template>
@@ -15,12 +15,7 @@ export default {
   name: "Task",
   props: {
     task: Object,
-  },
-  methods: {
-    onDelete(id) {
-      this.$emit('delete-task', id)
-    }
-  },
+  }
 };
 </script>
 
